@@ -7,12 +7,12 @@ import {
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { CreateUserDto } from "./dto/create-user.dto";
-import { User } from "./entities/user.entity";
+import { CreateUserDto } from "../dto/create-user.dto";
+import { User } from "../entities/user.entity";
 import * as bcrypt from "bcrypt";
 import { comparePassword, encodePassword } from "src/utils/bcrypt";
-import { LoginUserDto } from "./dto/login-user.dto";
-import { UserNotFoundException } from "./exceptions/userNotFound.exception";
+import { LoginUserDto } from "../dto/login-user.dto";
+import { UserNotFoundException } from "../common/exceptions/userNotFound.exception";
 import { JwtService } from "@nestjs/jwt";
 
 const saltOrRounds = 10;
@@ -29,7 +29,6 @@ export class UserService {
 		const password = encodePassword(createUserDto.password);
 		const newUser = this.userRepo.create({ ...createUserDto, password });
 		try {
-			
 			return await this.userRepo.save(newUser);
 		} catch (error) {
 			if (error.code === "ER_DUP_ENTRY") {
@@ -51,7 +50,6 @@ export class UserService {
 		if (!areEqual) {
 			throw new HttpException("Invalid credentials", HttpStatus.UNAUTHORIZED);
 		}
-		console.log(user);
 
 		return this.jwtUser(user.id, user.email);
 	}

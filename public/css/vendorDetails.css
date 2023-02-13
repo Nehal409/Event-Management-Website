@@ -178,20 +178,22 @@ header .search-bar-container label:hover {
 }
 
 /** Vendor name and image */
-
+  
 .container {
    width: 100%;
    height: 400px;
    background-position: center;
    background-size: cover;
-   background-image: url(../images/vendors/wedding2.jpeg);
    background-attachment: fixed;
    color: #fff;
-   font-size: 4rem;
    text-transform: uppercase;
-   padding-top: 150px;
+   padding-top: 150px; 
 }
-.container h2 {
+.container .content{
+   font-size: 4rem;
+}
+
+.container h2 {  
    font-size: 3rem;
 }
 
@@ -244,15 +246,19 @@ header .search-bar-container label:hover {
 }
 
 .about .row .content h3 {
+
    font-size: 3rem;
    color: #fff;
 }
 
 .about .row .content p {
+   width: 500px;
    font-size: 2.1rem;
-   color: #eee;
+   color: #fff;
    padding: 1rem 0;
    line-height: 2;
+   display: flex;
+   flex-wrap: wrap;
 }
 
 /* Radio button */
@@ -397,3 +403,16 @@ header .search-bar-container label:hover {
       padding-left: 40px;
    }
 }
+
+@media (max-width: 650px) {
+.about .row .content p {
+      width: 200px;
+      font-size: 2.1rem;
+      color: #fff;
+      padding: 1rem 0;
+      line-height: 2;
+      display: flex;
+      flex-wrap: wrap;
+   }
+}
+

@@ -1,12 +1,14 @@
 import { DataSource, DataSourceOptions } from "typeorm";
+require("dotenv").config();
+const dbPort: number = parseInt(process.env.DB_PORT);
 
 export const dataSourceOptions: DataSourceOptions = {
 	type: "mysql",
-	host: "localhost",
-	port: 3306,
-	username: "root",
+	host: process.env.DB_HOST,
+	port: dbPort,
+	username: process.env.DB_USERNAME,
 	password: "",
-	database: "event-db",
+	database: process.env.DATABASE,
 	entities: ["dist/**/*.entity.js"],
 	migrations: ["dist/db/migrations/*.js"],
 };

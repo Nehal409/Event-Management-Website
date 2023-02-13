@@ -38,6 +38,11 @@ html::-webkit-scrollbar-thumb {
 
 body {
    background: #222;
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+   margin: 0;
+      
 }
 
 section {
@@ -142,6 +147,7 @@ header .search-bar-container label:hover {
    padding: 1.5rem;
    padding-right: 2%;
    padding-left: 8%;
+   min-height: 50px;
 }
 
 .header .logo {
@@ -182,6 +188,7 @@ header .search-bar-container label:hover {
    padding-top: 10rem;
    margin: 2rem auto;
    max-width: 70rem;
+  
 }
 
 .home .content h3 {
@@ -197,20 +204,51 @@ header .search-bar-container label:hover {
 
 /** Packages section styling */
 
-.packages .box-container {
+.article{
+   flex: 1;
+}
+
+.packages {
+   height: auto;
+
+}
+
+.packages ul {
+   display: inline-flex;
+   margin: 0;
+   padding: 0;
+   width: 50%;
+   float: left;
+   justify-content: space-around;
+   flex-shrink: 1;
+   
+}
+
+.packages ul li {
+   list-style: none;
+   display: inline-block;
+   padding: 20px 30px;
+   width: 100%;
+}
+
+/* .packages .box-container {
    padding: 0px 65px;
    display: flex;
    flex-wrap: wrap;
    gap: 5rem;
    padding-bottom: 10rem;
-}
+} */
 
 .packages .box-container .box {
+   display: flex;
+   flex-wrap: wrap;
    flex: 1 1 35rem;
    border-radius: 0.5rem;
    overflow: hidden;
    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
    background: #333;
+   width: 100%;
+ 
 }
 
 .packages .box-container .box img {
@@ -221,9 +259,11 @@ header .search-bar-container label:hover {
 
 .packages .box-container .box .content {
    padding: 2rem;
+ 
 }
 
 .packages .box-container .box .content h3 {
+  
    font-size: 2.4rem;
    color: #fff;
 }
@@ -252,10 +292,12 @@ header .search-bar-container label:hover {
 
 /** Footer Section */
 .footer {
+   min-height: 50px;
    background: #111;
 }
 
 .footer .box-container {
+
    display: grid;
    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
    gap: 1.5rem;
