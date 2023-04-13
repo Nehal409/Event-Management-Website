@@ -11,6 +11,7 @@
 			href="https://unpkg.com/swiper/swiper-bundle.min.css"
 		/>
 		<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
 
 		<!-- font awesome cdn link  -->
 		<link
@@ -70,15 +71,18 @@
 					</div>
 
 					<div class="radios">
-						<div class="payment"><h3>Available Slots</h3></div>
+						<div class="payment">
+							<h3>Available Slots</h3>
+						</div>
 						<div class="top-radio">
 							<div class="radio-wrap">
 								<input
 									type="radio"
 									id="radio1"
-									value="option1"
+									value="Morning"
 									name="radio1"
 									class="text-center"
+									onchange="onRadioChange(event)"
 								/>
 								<label for="radio1">Morning</label>
 							</div>
@@ -86,9 +90,10 @@
 								<input
 									type="radio"
 									id="radio2"
-									value="option2"
+									value="Afternoon"
 									name="radio1"
 									class="text-center"
+									onchange="onRadioChange(event)"
 								/>
 								<label for="radio2">Afternoon</label>
 							</div>
@@ -96,9 +101,10 @@
 								<input
 									type="radio"
 									id="radio3"
-									value="option3"
+									value="Evening"
 									name="radio1"
 									class="text-center"
+									onchange="onRadioChange(event)"
 								/>
 								<label for="radio3">Evening</label>
 							</div>
@@ -106,9 +112,10 @@
 								<input
 									type="radio"
 									id="radio4"
-									value="option4"
+									value="Night"
 									name="radio1"
 									class="text-center"
+									onchange="onRadioChange(event)"
 								/>
 								<label for="radio4">Night</label>
 							</div>
@@ -146,13 +153,16 @@
 					<h3>contact info</h3>
 					<a href="#"> <i class="fas fa-phone"></i> +111-222-333 </a>
 					<a href="#">
-						<i class="fas fa-envelope"></i> suhailnarejo12@gmail.com
+						<i class="fas fa-envelope"></i>
+						suhailnarejo12@gmail.com
 					</a>
 					<a href="#">
-						<i class="fas fa-envelope"></i> alimurtuza222@gmail.com
+						<i class="fas fa-envelope"></i>
+						alimurtuza222@gmail.com
 					</a>
 					<a href="#">
-						<i class="fas fa-map-marker-alt"></i> Karachi, Pakistan</a
+						<i class="fas fa-map-marker-alt"></i>
+						Karachi, Pakistan</a
 					>
 				</div>
 			</div>
@@ -160,14 +170,27 @@
 
 		<!-- footer section ends -->
 		<script>
+			// remove clickedServices from localstorage when the page is loaded
+			window.localStorage.removeItem("clickedServices");
+
+			// Function for radio button
+			function onRadioChange(event) {
+				window.radio = event.target.value;
+				// save the value of radio button in localstorage
+				localStorage.setItem("slots", window.radio);
+				console.log(window.radio);
+			}
+
+			// Function to get access token from localstorage
 			function getTokenFromLocalStorage() {
 				const token = window.localStorage.getItem("my-secret");
-
 				if (token === null) {
 					return undefined;
 				}
 				return token;
 			}
+
+			// get eventId from localstorage
 			const vendorId = window.localStorage.getItem("eventId");
 			console.log(vendorId);
 
@@ -182,7 +205,7 @@
 
 						.then(response => {
 							response.data.forEach(element => {
-								console.log(element);
+								// console.log(element);
 								document.getElementById("VendorDetail").innerHTML += `
 							<section
 								class="container"
@@ -202,6 +225,7 @@
 					console.log(error);
 				}
 			}
+
 			async function getVenueDetails() {
 				try {
 					await axios
@@ -213,16 +237,16 @@
 
 						.then(response => {
 							response.data.forEach(element => {
-								console.log(element);
+								// console.log(element);
 								document.getElementById("venue").innerHTML += `
-					<h3>Venue:</h3>
-					<p>${element.venue.name}</p>
-					<h3>Capacity:</h3>
-					<p>${element.venue.capacity}</p>
-					<h3>Location:</h3>
-					<p>${element.venue.location}</p>
-					<h3>contact us at:</h3>
-					<p>${element.vendor.phone}</p>
+										<h3>Venue:</h3>
+										<p>${element.venue.name}</p>
+										<h3>Capacity:</h3>
+										<p>${element.venue.capacity}</p>
+										<h3>Location:</h3>
+										<p>${element.venue.location}</p>
+										<h3>contact us at:</h3>
+										<p>${element.vendor.phone}</p>
 				`;
 							});
 						});
@@ -243,12 +267,14 @@
 						.then(response => {
 							response.data.forEach(element => {
 								console.log(element);
-								document.getElementById("image").innerHTML += `<ul>
+								document.getElementById("image").innerHTML += `
+								
+								<ul>
 						<li>
 							<h3>
 								<input
 									type="checkbox"
-									checked
+									class="myCheckbox"
 									id="sound"
 									name="sound"
 									value="${element.vendor.vendors[0].name}"
@@ -260,7 +286,7 @@
 							<h3>
 								<input
 									type="checkbox"
-									checked
+									class="myCheckbox"
 									id="lighting"
 									name="lighting"
 									value="${element.vendor.vendors[1].name}"
@@ -272,7 +298,7 @@
 							<h3>
 								<input
 									type="checkbox"
-									checked
+									class="myCheckbox"
 									id="food"
 									name="food"
 									value="${element.vendor.vendors[2].name}"
@@ -284,7 +310,7 @@
 							<h3>
 								<input
 									type="checkbox"
-									checked
+									class="myCheckbox"
 									id="decor"
 									name="decor"
 									value="${element.vendor.vendors[3].name}"
@@ -296,7 +322,7 @@
 							<h3>
 								<input
 									type="checkbox"
-									checked
+									class="myCheckbox"
 									id="stage"
 									name="stage"
 									value="${element.vendor.vendors[4].name}"
@@ -308,7 +334,7 @@
 							<h3>
 								<input
 									type="checkbox"
-									checked
+									class="myCheckbox"
 									id="waiter"
 									name="waiter"
 									value="${element.vendor.vendors[5].name}"
@@ -320,7 +346,7 @@
 							<h3>
 								<input
 									type="checkbox"
-									checked
+									class="myCheckbox"
 									id="crocery"
 									name="crocery"
 									value="${element.vendor.vendors[6].name}"
@@ -328,10 +354,33 @@
 								<label for="crocery">${element.vendor.vendors[6].name}</label>
 							</h3>
 						</li>
-					</ul>`;
+					</ul>
+						`;
+
+								let services = [];
+								var myObj = {};
+								$(".myCheckbox").on("change", function () {
+									var thisValue = $(this).attr("value");
+									myObj[thisValue] = this.checked;
+									services.push(myObj);
+
+									var out = services.map(item =>
+										Object.fromEntries(
+											Object.entries(item).filter(
+												([key, value]) => value === true,
+											),
+										),
+									);
+
+									var firstArray = out[0];
+									var key = Object.keys(firstArray);
+									console.log(key);
+									localStorage.setItem("clickedServices", JSON.stringify(key));
+								});
 							});
 						});
 				} catch (error) {
+					window.location.href = "login.html";
 					console.log(error);
 				}
 			}

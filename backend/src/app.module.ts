@@ -3,12 +3,12 @@ import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { dataSourceOptions } from "db/data-source";
 
-import { UserModule } from "./repository/user.module";
+import { IndexModule } from "./repository/index.module";
 
 @Module({
 	imports: [
 		TypeOrmModule.forRoot(dataSourceOptions),
-		UserModule,
+		IndexModule,
 		ConfigModule.forRoot({
 			isGlobal: true,
 		}),

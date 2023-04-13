@@ -16,6 +16,9 @@ import { Event } from "src/entities/event.entity";
 import { EventController } from "src/controller/event.controller";
 import { EventService } from "src/service/event.service";
 import { Service } from "src/entities/services.entity";
+import { BillingDetails } from "src/entities/billing.entity";
+import { BillingController } from "src/controller/billing.controller";
+import { BillingDetailsService } from "src/service/billingDetails.service";
 
 @Module({
 	imports: [
@@ -27,13 +30,25 @@ import { Service } from "src/entities/services.entity";
 			Vendor,
 			Event,
 			Service,
+			BillingDetails,
 		]),
 		JwtModule.register({
 			secret: process.env.JWT_SECRET,
 			signOptions: { expiresIn: "1200s" },
 		}),
 	],
-	controllers: [UserController, ContactController, EventController],
-	providers: [UserService, ContactService, EventService, JwtStrategy],
+	controllers: [
+		UserController,
+		ContactController,
+		EventController,
+		BillingController,
+	],
+	providers: [
+		UserService,
+		ContactService,
+		EventService,
+		BillingDetailsService,
+		JwtStrategy,
+	],
 })
-export class UserModule {}
+export class IndexModule {}

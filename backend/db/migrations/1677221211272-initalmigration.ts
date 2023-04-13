@@ -1,9 +1,10 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class initialmigration1676196012870 implements MigrationInterface {
-    name = 'initialmigration1676196012870'
+export class initalmigration1677221211272 implements MigrationInterface {
+    name = 'initalmigration1677221211272'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`CREATE TABLE \`billing_details\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(255) NOT NULL, \`email\` varchar(255) NOT NULL, \`address\` varchar(255) NOT NULL, \`phone\` varchar(255) NOT NULL, \`city\` varchar(255) NOT NULL, \`cnicNumber\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`contact_form\` (\`id\` int NOT NULL AUTO_INCREMENT, \`createdDate\` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6), \`name\` varchar(255) NOT NULL, \`email\` varchar(255) NOT NULL, \`phone\` varchar(255) NOT NULL, \`subject\` varchar(255) NOT NULL, \`message\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`service\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`vendor\` (\`id\` int NOT NULL AUTO_INCREMENT, \`name\` varchar(255) NOT NULL, \`email\` varchar(255) NOT NULL, \`phone\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
@@ -36,6 +37,7 @@ export class initialmigration1676196012870 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE \`vendor\``);
         await queryRunner.query(`DROP TABLE \`service\``);
         await queryRunner.query(`DROP TABLE \`contact_form\``);
+        await queryRunner.query(`DROP TABLE \`billing_details\``);
     }
 
 }

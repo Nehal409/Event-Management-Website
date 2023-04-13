@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class secondmigration1676197988766 implements MigrationInterface {
-    name = 'secondmigration1676197988766'
+export class secondmigration1677221322163 implements MigrationInterface {
+    name = 'secondmigration1677221322163'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`ALTER TABLE \`event\` DROP FOREIGN KEY \`FK_abedac3524e60db083888140415\``);

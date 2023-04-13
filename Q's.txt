@@ -1,0 +1,9 @@
+1- how to save billing id for billing_type table.(done)
+2- how to save billing_id and billing_type_id and event_booking_id in localStorage for 
+   receipt table. (done)
+3- should we use crc_id in billing_type table as FK.
+4- should we save billing details and credit card details in localStorage when user.
+   insert them or save them in db directly because of validation.(done)
+5- should we use json datatype for selected_services in event_booking table.
+6- how to go to credit card details page when user select card as payment method and don't 
+   switch to credit card details page when select other payment methods.(done)
