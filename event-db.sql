@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 13, 2023 at 11:13 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Apr 21, 2023 at 03:05 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,35 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `billing_details`
+--
+
+CREATE TABLE `billing_details` (
+  `id` varchar(50) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `cnic` varchar(255) NOT NULL,
+  `billingTypeId` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `billing_type`
+--
+
+CREATE TABLE `billing_type` (
+  `id` varchar(50) NOT NULL,
+  `paymentMethod` enum('bank','card','easypaisa','jazzcash') NOT NULL DEFAULT 'card',
+  `creditCardId` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `contact_form`
 --
 
@@ -35,6 +64,21 @@ CREATE TABLE `contact_form` (
   `phone` varchar(255) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `credit_card`
+--
+
+CREATE TABLE `credit_card` (
+  `id` varchar(50) NOT NULL,
+  `creditCardNumber` varchar(255) NOT NULL,
+  `nameOnCard` varchar(255) NOT NULL,
+  `expMonth` varchar(255) NOT NULL,
+  `expYear` varchar(255) NOT NULL,
+  `cvv` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -77,6 +121,30 @@ INSERT INTO `event` (`id`, `total_price`, `img_url`, `vendorId`, `venueId`, `eve
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `event_booking`
+--
+
+CREATE TABLE `event_booking` (
+  `id` varchar(50) NOT NULL,
+  `selected_slots` enum('morning','afternoon','evening','night') NOT NULL DEFAULT 'morning',
+  `eventsId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_booking_services`
+--
+
+CREATE TABLE `event_booking_services` (
+  `id` varchar(50) NOT NULL,
+  `serviceName` varchar(255) NOT NULL,
+  `eventBookingId` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `event_type`
 --
 
@@ -112,12 +180,24 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `timestamp`, `name`) VALUES
-(1, 1676196012870, 'initialmigration1676196012870'),
+(1, 1682081590945, 'initialMigration1682081590945'),
 (2, 1675766022400, 'channelSeeds1675766022400'),
 (3, 1676047048400, 'vendorSeeds1676047048400'),
 (4, 1676047059005, 'venueSeeds1676047059005'),
-(5, 1676196200857, 'serviceSeeds1676196200857'),
-(6, 1676197988766, 'secondmigration1676197988766');
+(5, 1676196200857, 'serviceSeeds1676196200857');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `receipt`
+--
+
+CREATE TABLE `receipt` (
+  `id` varchar(50) NOT NULL,
+  `userId` int(11) DEFAULT NULL,
+  `eventBookingId` varchar(50) DEFAULT NULL,
+  `billingDetailsId` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -307,13 +387,6 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id`, `firstName`, `lastName`, `email`, `password`) VALUES
-(1, 'nehal', 'khan', 'nehalnaasirs619@gmail.com', '$2b$10$nJwU5QCdCMP8KHHYzGXofutMjeJvBFEYM1hMHAv3kMVGfwPkHFQxK');
-
 -- --------------------------------------------------------
 
 --
@@ -389,9 +462,29 @@ INSERT INTO `venue` (`id`, `name`, `location`, `capacity`) VALUES
 --
 
 --
+-- Indexes for table `billing_details`
+--
+ALTER TABLE `billing_details`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_a31dfff6c247b12c82a31a1c4f8` (`billingTypeId`);
+
+--
+-- Indexes for table `billing_type`
+--
+ALTER TABLE `billing_type`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_5b8b5a0a55b973efc24aeb9b7f2` (`creditCardId`);
+
+--
 -- Indexes for table `contact_form`
 --
 ALTER TABLE `contact_form`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `credit_card`
+--
+ALTER TABLE `credit_card`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -404,6 +497,20 @@ ALTER TABLE `event`
   ADD KEY `FK_3b674f340d59a5fc144f2229763` (`eventTypeId`);
 
 --
+-- Indexes for table `event_booking`
+--
+ALTER TABLE `event_booking`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_03742a5ee43f634888ce90c6730` (`eventsId`);
+
+--
+-- Indexes for table `event_booking_services`
+--
+ALTER TABLE `event_booking_services`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_71514e4683b2ce9bf799c862548` (`eventBookingId`);
+
+--
 -- Indexes for table `event_type`
 --
 ALTER TABLE `event_type`
@@ -414,6 +521,15 @@ ALTER TABLE `event_type`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `receipt`
+--
+ALTER TABLE `receipt`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_e011d4704c491f4d821d7ebb6ca` (`userId`),
+  ADD KEY `FK_38e788c8aac88694078b61ad920` (`eventBookingId`),
+  ADD KEY `FK_29dede2fdf3f2a3b0b694c7c079` (`billingDetailsId`);
 
 --
 -- Indexes for table `service`
@@ -474,7 +590,7 @@ ALTER TABLE `event_type`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `service`
@@ -486,7 +602,7 @@ ALTER TABLE `service`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `vendor`
@@ -505,12 +621,44 @@ ALTER TABLE `venue`
 --
 
 --
+-- Constraints for table `billing_details`
+--
+ALTER TABLE `billing_details`
+  ADD CONSTRAINT `FK_a31dfff6c247b12c82a31a1c4f8` FOREIGN KEY (`billingTypeId`) REFERENCES `billing_type` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `billing_type`
+--
+ALTER TABLE `billing_type`
+  ADD CONSTRAINT `FK_5b8b5a0a55b973efc24aeb9b7f2` FOREIGN KEY (`creditCardId`) REFERENCES `credit_card` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `event`
 --
 ALTER TABLE `event`
   ADD CONSTRAINT `FK_0a7a72120769940b25f994863c7` FOREIGN KEY (`venueId`) REFERENCES `venue` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_3b674f340d59a5fc144f2229763` FOREIGN KEY (`eventTypeId`) REFERENCES `event_type` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION,
   ADD CONSTRAINT `FK_abedac3524e60db083888140415` FOREIGN KEY (`vendorId`) REFERENCES `vendor` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `event_booking`
+--
+ALTER TABLE `event_booking`
+  ADD CONSTRAINT `FK_03742a5ee43f634888ce90c6730` FOREIGN KEY (`eventsId`) REFERENCES `event` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `event_booking_services`
+--
+ALTER TABLE `event_booking_services`
+  ADD CONSTRAINT `FK_71514e4683b2ce9bf799c862548` FOREIGN KEY (`eventBookingId`) REFERENCES `event_booking` (`id`) ON DELETE SET NULL ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `receipt`
+--
+ALTER TABLE `receipt`
+  ADD CONSTRAINT `FK_29dede2fdf3f2a3b0b694c7c079` FOREIGN KEY (`billingDetailsId`) REFERENCES `billing_details` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_38e788c8aac88694078b61ad920` FOREIGN KEY (`eventBookingId`) REFERENCES `event_booking` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_e011d4704c491f4d821d7ebb6ca` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `service_services_vendor`

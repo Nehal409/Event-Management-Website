@@ -4,10 +4,12 @@ import {
 	Column,
 	Unique,
 	ManyToOne,
+	OneToMany,
 } from "typeorm";
 import { EventType } from "./event-type.entity";
 import { Vendor } from "./vendor.entity";
 import { Venue } from "./venue.entity";
+import { EventBooking } from "./eventBooking.entity";
 
 @Entity()
 export class Event {
@@ -34,4 +36,7 @@ export class Event {
 		onDelete: "SET NULL",
 	})
 	eventType: EventType;
+
+	@OneToMany(() => EventBooking, eventBooking => eventBooking.events)
+	eventBookings: EventBooking[];
 }

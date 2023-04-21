@@ -13,6 +13,7 @@ import {
 import { HttpExceptionFilter } from "src/common/filters/httpException.filter";
 
 import { EventService } from "src/service/event.service";
+import { getCurrentUserById } from "src/utils/decorators/get-user-by-id-jwt.decorator";
 import { JwtAuthGuard } from "src/utils/guards/jwt-guard.guard";
 
 @Controller("events")
@@ -35,8 +36,14 @@ export class EventController {
 	@UseGuards(JwtAuthGuard)
 	@Get("/vendors/eventTypes/:id")
 	@UseFilters(HttpExceptionFilter)
-	getEventTyprVendor(@Param("id", ParseIntPipe) id: number) {
-		return this.eventService.getEventTypeVendor(id);
+	async getEventTyprVendor(
+		@Param("id", ParseIntPipe) id: number,
+		@getCurrentUserById() userId: number,
+	) {
+		const vendorType = await this.eventService.getEventTypeVendor(id);
+
+		const loggedInUser = userId;
+		return { vendorType, loggedInUser };
 	}
 
 	@UseGuards(JwtAuthGuard)

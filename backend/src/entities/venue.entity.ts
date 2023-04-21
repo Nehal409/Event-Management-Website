@@ -18,17 +18,3 @@ export class Venue {
 	@OneToMany(() => Event, event => event.venue)
 	events: Event[];
 }
-
-// export enum availableSlots {
-// 	MORNING = "morning",
-// 	AFTERNOON = "afternoon",
-// 	EVENING = "evening",
-// 	NIGHT = "night",
-// }
-
-// @Column({
-// 	type: "enum",
-// 	enum: availableSlots,
-// 	default: availableSlots.MORNING,
-// })
-// available_slots: string;

@@ -5,6 +5,7 @@ import {
 	Unique,
 	OneToMany,
 } from "typeorm";
+import { Receipt } from "./receipt.entity";
 
 @Entity()
 export class User {
@@ -22,4 +23,9 @@ export class User {
 
 	@Column()
 	password: string;
+
+	@OneToMany(() => Receipt, receipt => receipt.user, {
+		onDelete: "SET NULL",
+	})
+	receipt: Receipt[];
 }

@@ -144,6 +144,7 @@
 							password: password,
 						})
 						.then(response => {
+							console.log(response);
 							window.localStorage.setItem("my-secret", response.data);
 							window.location.href = "index.html";
 							form.reset();

@@ -25,5 +25,5 @@ export class CreateBillingDetailsDto {
 	city: string;
 
 	@IsNotEmpty()
-	cnicNumber: string;
+	cnic: string;
 }

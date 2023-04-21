@@ -101,12 +101,10 @@
 				return token;
 			}
 			function handleVendorClick(id) {
-				console.log(id);
 				window.localStorage.setItem("eventId", id);
 			}
 
 			const eventId = window.localStorage.getItem("eventTypeId");
-			console.log(eventId);
 
 			async function getEventDetails() {
 				try {
@@ -118,12 +116,13 @@
 						})
 
 						.then(response => {
-							response.data.forEach(element => {
-								document.getElementById("home").innerHTML += ` 
+							const vendorType = response.data.vendorType[0].name;
+							const loggedInUser = response.data.loggedInUser;
+							localStorage.setItem("userId", loggedInUser);
+							document.getElementById("home").innerHTML += ` 
                         	<div class="content">
-				<h3>Here are the available <span>vendors for ${element.name}</span></h3>
+				<h3>Here are the available <span>vendors for ${vendorType}</span></h3>
 			</div>`;
-							});
 						});
 				} catch (error) {
 					console.log(error);

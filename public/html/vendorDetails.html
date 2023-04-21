@@ -79,10 +79,9 @@
 								<input
 									type="radio"
 									id="radio1"
-									value="Morning"
+									value="morning"
 									name="radio1"
 									class="text-center"
-									onchange="onRadioChange(event)"
 								/>
 								<label for="radio1">Morning</label>
 							</div>
@@ -90,10 +89,9 @@
 								<input
 									type="radio"
 									id="radio2"
-									value="Afternoon"
+									value="afternoon"
 									name="radio1"
 									class="text-center"
-									onchange="onRadioChange(event)"
 								/>
 								<label for="radio2">Afternoon</label>
 							</div>
@@ -101,10 +99,9 @@
 								<input
 									type="radio"
 									id="radio3"
-									value="Evening"
+									value="evening"
 									name="radio1"
 									class="text-center"
-									onchange="onRadioChange(event)"
 								/>
 								<label for="radio3">Evening</label>
 							</div>
@@ -112,17 +109,16 @@
 								<input
 									type="radio"
 									id="radio4"
-									value="Night"
+									value="night"
 									name="radio1"
 									class="text-center"
-									onchange="onRadioChange(event)"
 								/>
 								<label for="radio4">Night</label>
 							</div>
 						</div>
 					</div>
 
-					<a href="billingDetails.html" class="btn">Book Now</a>
+					<a class="btn" id="save_button">Book Now</a>
 				</div>
 			</div>
 		</section>
@@ -171,15 +167,8 @@
 		<!-- footer section ends -->
 		<script>
 			// remove clickedServices from localstorage when the page is loaded
-			window.localStorage.removeItem("clickedServices");
-
-			// Function for radio button
-			function onRadioChange(event) {
-				window.radio = event.target.value;
-				// save the value of radio button in localstorage
-				localStorage.setItem("slots", window.radio);
-				console.log(window.radio);
-			}
+			window.localStorage.removeItem("eventBooking");
+			window.localStorage.removeItem("eventBookingServices");
 
 			// Function to get access token from localstorage
 			function getTokenFromLocalStorage() {
@@ -192,7 +181,6 @@
 
 			// get eventId from localstorage
 			const vendorId = window.localStorage.getItem("eventId");
-			console.log(vendorId);
 
 			async function getEventDetails() {
 				try {
@@ -205,7 +193,6 @@
 
 						.then(response => {
 							response.data.forEach(element => {
-								// console.log(element);
 								document.getElementById("VendorDetail").innerHTML += `
 							<section
 								class="container"
@@ -215,9 +202,9 @@
 									<h1>${element.vendor.name}</h1>
 									<h2>Here's what we offer</h2>
 								</div>
-								
+
 							</section>
-			
+
 				`;
 							});
 						});
@@ -237,7 +224,6 @@
 
 						.then(response => {
 							response.data.forEach(element => {
-								// console.log(element);
 								document.getElementById("venue").innerHTML += `
 										<h3>Venue:</h3>
 										<p>${element.venue.name}</p>
@@ -266,9 +252,8 @@
 
 						.then(response => {
 							response.data.forEach(element => {
-								console.log(element);
 								document.getElementById("image").innerHTML += `
-								
+
 								<ul>
 						<li>
 							<h3>
@@ -357,25 +342,66 @@
 					</ul>
 						`;
 
-								let services = [];
-								var myObj = {};
-								$(".myCheckbox").on("change", function () {
-									var thisValue = $(this).attr("value");
-									myObj[thisValue] = this.checked;
-									services.push(myObj);
+								const saveButton = document.getElementById("save_button");
+								const selectedServices = [];
+								// Add event listener to trigger localStorage saving on button click or form submit
+								saveButton.addEventListener("click", function (event) {
+									event.preventDefault();
 
-									var out = services.map(item =>
-										Object.fromEntries(
-											Object.entries(item).filter(
-												([key, value]) => value === true,
-											),
-										),
+									// Get reference to all the checkbox inputs
+									const checkboxes = document.querySelectorAll(".myCheckbox");
+
+									// Get reference to the radio button input
+									const radio = document.querySelector(
+										'input[name="radio1"]:checked',
 									);
 
-									var firstArray = out[0];
-									var key = Object.keys(firstArray);
-									console.log(key);
-									localStorage.setItem("clickedServices", JSON.stringify(key));
+									// Generate a unique ID for this event by concatenating the current timestamp with a random number
+									const eventBookingId =
+										Date.now() + "-" + Math.floor(Math.random() * 1000);
+
+									// Create a new object to store the values
+									const eventData = {
+										id: eventBookingId,
+										eventId: vendorId,
+										slot: radio ? radio.value : null,
+									};
+
+									localStorage.setItem(
+										"eventBooking",
+										JSON.stringify(eventData),
+									);
+
+									// Loop through each checkbox and add its value to the eventData object if it's checked
+									checkboxes.forEach(function (checkbox) {
+										if (checkbox.checked) {
+											selectedServices.push(checkbox.value);
+										}
+									});
+									const serviceObjects = [];
+									let getEventBooking = JSON.parse(
+										localStorage.getItem("eventBooking"),
+									);
+									const EventBookingId = getEventBooking.id;
+
+									// iterate over each selected service and create a service object with the unique ID, service name, and eventBookingId
+									selectedServices.forEach(service => {
+										const serviceObject = {
+											id: Date.now() + Math.random().toString(36).substr(2, 9),
+											serviceName: service,
+											eventBookingId: EventBookingId,
+										};
+
+										// push the service object to the serviceObjects array
+										serviceObjects.push(serviceObject);
+										console.log(serviceObjects[0]);
+										localStorage.setItem(
+											"eventBookingServices",
+											JSON.stringify(serviceObjects),
+										);
+									});
+
+									window.location.href = "billingDetails.html";
 								});
 							});
 						});
