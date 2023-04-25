@@ -16,7 +16,7 @@ export class ContactService {
 		@InjectRepository(ContactForm) private contactRepo: Repository<ContactForm>,
 	) {}
 
-	/** User Registration */
+	/** Conatct Form */
 	async createContact(createContactDto: CreateContactDto) {
 		try {
 			return await this.contactRepo.save(createContactDto);

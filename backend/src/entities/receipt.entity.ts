@@ -23,4 +23,5 @@ export class Receipt {
 
 	@ManyToOne(() => BillingDetails, billingDetails => billingDetails.receipt)
 	billingDetails: BillingDetails;
+	receipt: { id: string };
 }

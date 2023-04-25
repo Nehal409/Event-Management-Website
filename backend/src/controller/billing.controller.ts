@@ -5,16 +5,29 @@ import {
 	UsePipes,
 	ValidationPipe,
 } from "@nestjs/common";
-import { CreateBillingDetailsDto } from "src/dto/create-billingDetails.dto";
-import { BillingDetailsService } from "src/service/billingDetails.service";
+import { BillingDetailsDto } from "src/dto/billingDetails.dto";
+import { BillingTypeDto } from "src/dto/billingType.dto";
+import { BillingDetails } from "src/entities/billingDetails.entity";
+import { BillingType } from "src/entities/billingType.entity";
+import { BillingService } from "src/service/billing.service";
 
 @Controller("billing")
 export class BillingController {
-	constructor(private readonly billingDetailsService: BillingDetailsService) {}
+	constructor(private readonly billingService: BillingService) {}
 
-	@Post("/")
+	@Post("/types")
 	@UsePipes(ValidationPipe)
-	billingForm(@Body() createBillingDetailsDto: CreateBillingDetailsDto) {
-		return this.billingDetailsService.createBilling(createBillingDetailsDto);
+	createBillingType(
+		@Body() billingTypeDto: BillingTypeDto,
+	): Promise<BillingType> {
+		return this.billingService.createBillingType(billingTypeDto);
+	}
+
+	@Post("/details")
+	@UsePipes(ValidationPipe)
+	createBillingDetails(
+		@Body() billingDetailsDto: BillingDetailsDto,
+	): Promise<BillingDetails> {
+		return this.billingService.createBillingDetails(billingDetailsDto);
 	}
 }

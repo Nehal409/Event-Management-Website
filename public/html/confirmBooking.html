@@ -10,6 +10,7 @@
 			rel="stylesheet"
 			href="https://unpkg.com/swiper/swiper-bundle.min.css"
 		/>
+		<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 
 		<!-- font awesome cdn link  -->
 		<link
@@ -87,41 +88,193 @@
 
 		<!-- footer section ends -->
 		<script>
-			let getCrcId = JSON.parse(localStorage.getItem("creditCardDetails"));
-			let crcId = getCrcId.id;
+			if (localStorage.getItem("creditCardDetails")) {
+				/** Seeting localstorage */
+				let getCrcId = JSON.parse(localStorage.getItem("creditCardDetails"));
+				let crcId = getCrcId.id;
 
-			// Retrieve existing payment data from localStorage
-			let addCrcIdToBillingType = JSON.parse(
-				localStorage.getItem("billingType"),
-			);
+				// Retrieve existing payment data from localStorage
+				let addCrcIdToBillingType = JSON.parse(
+					localStorage.getItem("billingType"),
+				);
 
-			// Add a new property to the object
-			addCrcIdToBillingType.crcId = crcId;
+				// Add a new property to the object
+				addCrcIdToBillingType.crcId = crcId;
 
-			// Convert the updated object back to JSON string
-			let updatedBillingType = JSON.stringify(addCrcIdToBillingType);
+				// Convert the updated object back to JSON string
+				let updatedBillingType = JSON.stringify(addCrcIdToBillingType);
 
-			// Save the updated string to localStorage
-			localStorage.setItem("billingType", updatedBillingType);
+				// Save the updated string to localStorage
+				localStorage.setItem("billingType", updatedBillingType);
+			}
 
 			const userId = JSON.parse(localStorage.getItem("userId"));
 			const eventBooking = JSON.parse(localStorage.getItem("eventBooking"));
-			console.log(eventBooking.id);
 			const billingDetails = JSON.parse(localStorage.getItem("billingDetails"));
-			console.log(billingDetails.id);
 
-			const id = Date.now().toString(36) + Math.random().toString(36).substr(2);
+			// Setting Receipt localstorage
+			const receiptid =
+				Date.now().toString(36) + Math.random().toString(36).substr(2);
 
 			const receiptData = {
-				id: id,
+				id: receiptid,
 				userId: userId,
 				eventBookingId: eventBooking.id,
 				billingDetailsId: billingDetails.id,
 			};
 
 			localStorage.setItem("Receipt", JSON.stringify(receiptData));
-		</script>
 
+			/** Getting data from localstorage to db */
+			async function saveBookingDetails() {
+				// For EventBooking
+				async function saveEventBooking() {
+					const { id, eventId, slot } = eventBooking;
+					try {
+						await axios.post("http://localhost:3000/events/bookings", {
+							id,
+							selected_slots: slot,
+							eventsId: eventId,
+						});
+						console.log("Event booking saved successfully");
+					} catch (error) {
+						console.error("Error saving event booking:", error.message);
+					}
+				}
+
+				// For EventBookingServices
+				const eventBookingServices = JSON.parse(
+					localStorage.getItem("eventBookingServices"),
+				);
+				async function saveEventBookingServices() {
+					try {
+						const servicesToSave = eventBookingServices.map(service => ({
+							id: service.id,
+							serviceName: service.serviceName,
+							eventBookingId: service.eventBookingId,
+						}));
+						await axios.post(
+							"http://localhost:3000/events/bookings/services",
+							servicesToSave,
+						);
+
+						console.log("Event booking services saved successfully");
+					} catch (error) {
+						console.error(
+							"Error saving event booking services:",
+							error.message,
+						);
+					}
+				}
+
+				// For CreditCardCredentials
+				let getCreditCardCredentials = JSON.parse(
+					localStorage.getItem("creditCardDetails"),
+				);
+				async function saveCreditCard() {
+					const {
+						id,
+						name,
+						expiry_year,
+						expiry_month,
+						cvv,
+						credit_card_number,
+					} = getCreditCardCredentials;
+					try {
+						await axios.post("http://localhost:3000/payment/card", {
+							id,
+							creditCardNumber: credit_card_number,
+							nameOnCard: name,
+							expMonth: expiry_month,
+							expYear: expiry_year,
+							cvv: cvv,
+						});
+						console.log("Credit card credentials saved successfully");
+					} catch (error) {
+						console.error(
+							"Error saving credit card credentials:",
+							error.message,
+						);
+					}
+				}
+
+				// For BillngType
+				let getBillingType = JSON.parse(localStorage.getItem("billingType"));
+				async function saveBillingType() {
+					const { id, value, crcId } = getBillingType || {};
+
+					try {
+						if (crcId) {
+							await axios.post("http://localhost:3000/billing/types", {
+								id,
+								paymentMethod: value,
+								creditCardId: crcId,
+							});
+						} else {
+							await axios.post("http://localhost:3000/billing/types", {
+								id,
+								paymentMethod: value,
+							});
+						}
+						console.log("Billing Type saved successfully");
+					} catch (error) {
+						console.error("Error saving Billing Type:", error.message);
+					}
+				}
+
+				// For BillingDetails
+				async function saveBillingDetails() {
+					const { id, address, city, cnic, email, name, phone, billingTypeId } =
+						billingDetails;
+					try {
+						await axios.post("http://localhost:3000/billing/details", {
+							id,
+							name: name,
+							email: email,
+							address: address,
+							phone: phone,
+							city: city,
+							cnic: cnic,
+							billingTypeId: billingTypeId,
+						});
+						console.log("Billing Details saved successfully");
+					} catch (error) {
+						console.error("Error saving Billing Details:", error.message);
+					}
+				}
+
+				// For Receipt
+				const Receipt = JSON.parse(localStorage.getItem("Receipt"));
+				async function saveReceipt() {
+					const { id, billingDetailsId, eventBookingId, userId } = Receipt;
+					try {
+						await axios.post("http://localhost:3000/receipt/", {
+							id,
+							userId: userId,
+							eventBookingId: eventBookingId,
+							billingDetailsId: billingDetailsId,
+						});
+						console.log("Receipt data saved successfully");
+					} catch (error) {
+						console.error("Error saving Receipt data:", error.message);
+					}
+				}
+
+				await saveEventBooking();
+				await saveEventBookingServices();
+				if (localStorage.getItem("creditCardDetails")) {
+					await saveCreditCard();
+				}
+				await saveBillingType();
+				await saveBillingDetails();
+				await saveReceipt();
+			}
+
+			/** Call this function when user click on confirm booking and delete the localstorage data when user
+			 * cancel the booking	 */
+
+			saveBookingDetails();
+		</script>
 		<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 		<!-- custom js file link  -->

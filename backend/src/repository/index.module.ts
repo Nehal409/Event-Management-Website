@@ -17,13 +17,17 @@ import { EventController } from "src/controller/event.controller";
 import { EventService } from "src/service/event.service";
 import { Service } from "src/entities/services.entity";
 import { BillingDetails } from "src/entities/billingDetails.entity";
-import { BillingController } from "src/controller/billing.controller";
-import { BillingDetailsService } from "src/service/billingDetails.service";
 import { EventBooking } from "src/entities/eventBooking.entity";
 import { EventBookingServices } from "src/entities/eventBookingServices.entity";
 import { Receipt } from "src/entities/receipt.entity";
 import { BillingType } from "src/entities/billingType.entity";
 import { CreditCard } from "src/entities/creditCard.entity";
+import { CardPaymentController } from "src/controller/payment.controller";
+import { PaymentService } from "src/service/payment.service";
+import { BillingController } from "src/controller/billing.controller";
+import { BillingService } from "src/service/billing.service";
+import { ReceiptController } from "src/controller/receipt.controller";
+import { ReceiptService } from "src/service/receipt.service";
 
 @Module({
 	imports: [
@@ -52,12 +56,16 @@ import { CreditCard } from "src/entities/creditCard.entity";
 		ContactController,
 		EventController,
 		BillingController,
+		CardPaymentController,
+		ReceiptController,
 	],
 	providers: [
 		UserService,
 		ContactService,
 		EventService,
-		BillingDetailsService,
+		BillingService,
+		PaymentService,
+		ReceiptService,
 		JwtStrategy,
 	],
 })

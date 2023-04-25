@@ -35,17 +35,14 @@ Make sure to have the following installed in your system before running the appl
 #### backend
 
 1. Install the required packages by running npm install in the backend's root folder.
-
 2. Ensure that XAMPP server is running before starting the backend server.
-
 3. Import the "event-db.sql" file located in the project root folder to your localhost. First, create a database with the name "event-db" and then import the SQL file into that database.
-
 4. To start the server, run npm run start:dev in the backend's root folder (e.g. /workspace/Event-Management-Website/backend).
 
 #### Create Migrations
 
 1. Navigate to the root folder of the backend by typing 'cd backend/' in the command prompt.
-2. Execute the command 'npm run migration:generate <migration-name>' to generate a migration file.
+2. Execute the command 'npm run migration:generate MigrationName' to generate a migration file.
 3. The migration file will be created, and you need to copy it to the migration folder inside the db folder.
 4. Run the command 'npm run migration:run' to run the migration.
 5. Copy the seeds file into the migration folder and run 'npm run migration:run' again.

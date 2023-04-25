@@ -11,6 +11,10 @@ import {
 	UseGuards,
 } from "@nestjs/common";
 import { HttpExceptionFilter } from "src/common/filters/httpException.filter";
+import { EventBookingDto } from "src/dto/eventBooking.dto";
+import { EventBookingServiceDto } from "src/dto/eventBookingServices.dto";
+import { EventBooking } from "src/entities/eventBooking.entity";
+import { EventBookingServices } from "src/entities/eventBookingServices.entity";
 
 import { EventService } from "src/service/event.service";
 import { getCurrentUserById } from "src/utils/decorators/get-user-by-id-jwt.decorator";
@@ -66,5 +70,23 @@ export class EventController {
 	@UseFilters(HttpExceptionFilter)
 	getVendors(@Param("id", ParseIntPipe) id: number) {
 		return this.eventService.getVendor(id);
+	}
+
+	@Post("/bookings")
+	@UsePipes(ValidationPipe)
+	createEventBookings(
+		@Body() eventBookingDto: EventBookingDto,
+	): Promise<EventBooking> {
+		return this.eventService.createEventBooking(eventBookingDto);
+	}
+
+	@Post("/bookings/services")
+	@UsePipes(ValidationPipe)
+	createBookingServices(
+		@Body() eventBookingServicesDto: EventBookingServiceDto[],
+	): Promise<EventBookingServices[]> {
+		return this.eventService.createEventBookingSrevices(
+			eventBookingServicesDto,
+		);
 	}
 }

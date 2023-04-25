@@ -1,144 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Signup</title>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Signup</title>
 
-      <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-      <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/swiper/swiper-bundle.min.css"
+		/>
+		<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 
-      <!-- font awesome cdn link  -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+		<!-- font awesome cdn link  -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+		/>
 
-      <!-- custom css file link  -->
-      <link rel="stylesheet" href="../css/registration.css" />
-   </head>
-   <body>
-      <!-- header section starts  -->
+		<!-- custom css file link  -->
+		<link rel="stylesheet" href="../css/registration.css" />
+	</head>
+	<body>
+		<!-- header section starts  -->
 
-      <header class="header">
-         <a href="index.html" class="logo"
-            ><div class="logos"><img src="../images/Untitled design.png" alt="" /></div
-         ></a>
+		<header class="header">
+			<a href="index.html" class="logo"
+				><div class="logos">
+					<img src="../images/Untitled design.png" alt="" /></div
+			></a>
 
-         <nav class="navbar">
-            <a href="index.html">home</a>
-            <a href="#service">services</a>
-            <a href="index.html">about</a>
-            <a href="index.html">contact</a>
-            <a href="login.html">login</a>
-         </nav>
-         <div class="icons">
-            <i class="fas fa-search" id="search-btn"></i>
-         </div>
+			<nav class="navbar">
+				<a href="index.html">home</a>
+				<a href="#service">services</a>
+				<a href="index.html">about</a>
+				<a href="index.html">contact</a>
+				<a href="login.html">login</a>
+			</nav>
+			<div class="icons">
+				<i class="fas fa-search" id="search-btn"></i>
+			</div>
 
-         <form action="" class="search-bar-container">
-            <input type="search" id="search-bar" placeholder="search here..." />
-            <label for="search-bar" class="fas fa-search"></label>
-         </form>
+			<form action="" class="search-bar-container">
+				<input type="search" id="search-bar" placeholder="search here..." />
+				<label for="search-bar" class="fas fa-search"></label>
+			</form>
 
-         <div id="menu-bars" class="fas fa-bars"></div>
-      </header>
+			<div id="menu-bars" class="fas fa-bars"></div>
+		</header>
 
-      <!-- header section ends -->
+		<!-- header section ends -->
 
-      <!-- contact section starts  -->
-      <section class="contact" id="contact">
-         <div class="login-heading">
-            <h1 class="heading"><span>R</span>egistration</h1>
-         </div>
-         <div class="form">
-            <form action="" method="post" id="form">
-               <p id="log"></p>
-               <input class="no-outline" required name="first-name" id="first-name"  type="text" placeholder="First Name.." /><br />
-               <br />
-               <input class="no-outline" required name="last-name" id="last-name" type="text" placeholder="Last Name.." /><br />
-               <br />
-               <input class="no-outline" required name="email" id="email" type="email" placeholder="Email.." /><br />
-               <br />
-               <input class="no-outline" required name="Password" id="pass" type="password" placeholder="Password.." /><br />
+		<!-- contact section starts  -->
+		<section class="contact" id="contact">
+			<div class="login-heading">
+				<h1 class="heading"><span>R</span>egistration</h1>
+			</div>
+			<div class="form">
+				<form action="" method="post" id="form">
+					<p id="log"></p>
+					<input
+						class="no-outline"
+						required
+						name="first-name"
+						id="first-name"
+						type="text"
+						placeholder="First Name.."
+					/><br />
+					<br />
+					<input
+						class="no-outline"
+						required
+						name="last-name"
+						id="last-name"
+						type="text"
+						placeholder="Last Name.."
+					/><br />
+					<br />
+					<input
+						class="no-outline"
+						required
+						name="email"
+						id="email"
+						type="email"
+						placeholder="Email.."
+					/><br />
+					<br />
+					<input
+						class="no-outline"
+						required
+						name="Password"
+						id="pass"
+						type="password"
+						placeholder="Password.."
+					/><br />
 
-               <br />
+					<br />
 
-               <div class="forgot-pss-align">
-                  <input class="btn" type="submit" value="Submit" />
-               </div>
-            </form>
-         </div>
-      </section>
+					<div class="forgot-pss-align">
+						<input class="btn" type="submit" value="Submit" />
+					</div>
+				</form>
+			</div>
+		</section>
 
-      <!-- contact section ends -->
+		<!-- contact section ends -->
 
-      <!-- footer section starts  -->
+		<!-- footer section starts  -->
 
-      <section class="footer">
-         <div class="box-container">
-            <div class="box">
-               <h3>follow us</h3>
-               <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
-               <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
-               <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
-               <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
-            </div>
+		<section class="footer">
+			<div class="box-container">
+				<div class="box">
+					<h3>follow us</h3>
+					<a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
+					<a href="#"> <i class="fab fa-twitter"></i> twitter </a>
+					<a href="#"> <i class="fab fa-instagram"></i> instagram </a>
+					<a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
+				</div>
 
-            <div class="box">
-               <h3>quick links</h3>
-               <a href="#service"> <i class="fas fa-arrow-right"></i> services </a>
-               <a href="#about"> <i class="fas fa-arrow-right"></i> about </a>
-               <a href="login.html"> <i class="fas fa-arrow-right"></i> login </a>
-               <a href="#contact"> <i class="fas fa-arrow-right"></i> contact </a>
-            </div>
+				<div class="box">
+					<h3>quick links</h3>
+					<a href="#service"> <i class="fas fa-arrow-right"></i> services </a>
+					<a href="#about"> <i class="fas fa-arrow-right"></i> about </a>
+					<a href="login.html"> <i class="fas fa-arrow-right"></i> login </a>
+					<a href="#contact"> <i class="fas fa-arrow-right"></i> contact </a>
+				</div>
 
-            <div class="box">
-               <h3>contact info</h3>
-               <a href="#"> <i class="fas fa-phone"></i> +111-222-333 </a>
-               <a href="#"> <i class="fas fa-envelope"></i> suhailnarejo12@gmail.com </a>
-               <a href="#"> <i class="fas fa-envelope"></i> alimurtuza222@gmail.com </a>
-               <a href="#"> <i class="fas fa-map-marker-alt"></i> Karachi, Pakistan</a>
-            </div>
-         </div>
-      </section>
-      <!-- footer section ends -->
+				<div class="box">
+					<h3>contact info</h3>
+					<a href="#"> <i class="fas fa-phone"></i> +111-222-333 </a>
+					<a href="#">
+						<i class="fas fa-envelope"></i> suhailnarejo12@gmail.com
+					</a>
+					<a href="#">
+						<i class="fas fa-envelope"></i> alimurtuza222@gmail.com
+					</a>
+					<a href="#">
+						<i class="fas fa-map-marker-alt"></i> Karachi, Pakistan</a
+					>
+				</div>
+			</div>
+		</section>
+		<!-- footer section ends -->
 
-      <script>
-          const form = document.getElementById('form');
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
+		<script>
+			const form = document.getElementById("form");
+			form.addEventListener("submit", async function (e) {
+				e.preventDefault();
 
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('pass').value;
-        const first_name = document.getElementById('first-name').value;
-        const last_name = document.getElementById('last-name').value;
+				const email = document.getElementById("email").value;
+				const password = document.getElementById("pass").value;
+				const first_name = document.getElementById("first-name").value;
+				const last_name = document.getElementById("last-name").value;
 
-        try {
-          const res = await axios.post('http://localhost:3000/user/register',
-           { firstName: first_name,lastName:last_name, email: email, password: password})
-           .then((response) => {
-            console.log(response);
-            log.textContent = response.data.message;
-            window.location.href = 'login.html';
-            form.reset();
-          });
-        } catch (error) {
-         console.log(error.response.data.message);
-         if(error.response.data.message[0]=== 
-         'Password is too short. Minimal length is 5 characters'){
-            log.textContent = 'Password is too short'
+				try {
+					const res = await axios
+						.post("http://localhost:3000/user/register", {
+							firstName: first_name,
+							lastName: last_name,
+							email: email,
+							password: password,
+						})
+						.then(response => {
+							console.log(response);
+							log.textContent = response.data.message;
+							window.location.href = "login.html";
+							form.reset();
+						});
+				} catch (error) {
+					console.log(error.response.data.message);
+					if (
+						error.response.data.message[0] ===
+						"Password is too short. Minimal length is 5 characters"
+					) {
+						log.textContent = "Password is too short";
+					} else {
+						log.textContent = "User already exist";
+					}
+				}
+			});
+		</script>
 
-         }
-         else{
-            log.textContent = 'User already exist'
-         }
-          
-        }
-      });
-      </script>
+		<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-      <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-      <!-- custom js file link  -->
-      <script src="../js/script.js"></script>
-   </body>
+		<!-- custom js file link  -->
+		<script src="../js/script.js"></script>
+	</body>
 </html>
