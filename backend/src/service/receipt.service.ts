@@ -65,4 +65,63 @@ export class ReceiptService {
 			throw new InternalServerErrorException();
 		}
 	}
+
+	/** Get Booking Details  */
+	async getBookingDetails(id: string) {
+		const receiptDetails = await this.receiptRepo.find({
+			select: {
+				id: true,
+				eventBooking: {
+					id: true,
+					selected_slots: true,
+					eventBookingService: {
+						serviceName: true,
+					},
+					events: {
+						total_price: true,
+						vendor: {
+							name: true,
+							phone: true,
+						},
+						venue: {
+							name: true,
+							location: true,
+						},
+						eventType: {
+							name: true,
+						},
+					},
+				},
+				billingDetails: {
+					id: true,
+					name: true,
+					email: true,
+					cnic: true,
+					bookingDate: true,
+					billingType: {
+						id: true,
+						paymentMethod: true,
+					},
+				},
+			},
+			relations: {
+				eventBooking: {
+					eventBookingService: true,
+					events: {
+						vendor: true,
+						venue: true,
+						eventType: true,
+					},
+				},
+				billingDetails: {
+					billingType: true,
+				},
+			},
+			where: {
+				id: id,
+			},
+		});
+
+		return receiptDetails;
+	}
 }

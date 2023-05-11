@@ -58,8 +58,17 @@ export class BillingService {
 	async createBillingDetails(
 		billingDetailsDto: BillingDetailsDto,
 	): Promise<BillingDetails> {
-		const { id, name, email, address, phone, city, cnic, billingTypeId } =
-			billingDetailsDto;
+		const {
+			id,
+			name,
+			email,
+			address,
+			phone,
+			city,
+			cnic,
+			billingTypeId,
+			bookingDate,
+		} = billingDetailsDto;
 
 		const billingType = await this.billingTypeRepo.findOne({
 			where: { id: billingTypeId },
@@ -79,6 +88,7 @@ export class BillingService {
 			billingDetails.phone = phone;
 			billingDetails.city = city;
 			billingDetails.cnic = cnic;
+			billingDetails.bookingDate = bookingDate;
 			billingDetails.billingType = billingType;
 
 			return await this.billingDetailsRepo.save(billingDetails);

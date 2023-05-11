@@ -25,6 +25,9 @@ export class BillingDetails {
 	@Column()
 	cnic: string;
 
+	@Column({ type: "date" })
+	bookingDate: Date;
+
 	@ManyToOne(() => BillingType, billingType => billingType.billingDetails)
 	billingType: BillingType;
 

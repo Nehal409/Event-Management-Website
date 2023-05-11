@@ -5,7 +5,6 @@
 }
 
 * {
-	font-family: "Poppins", sans-serif;
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
@@ -42,19 +41,6 @@ body {
 
 section {
 	padding: 2rem 9%;
-}
-
-.heading {
-	text-align: center;
-	padding-bottom: 2rem;
-	color: #fff;
-	text-transform: uppercase;
-	font-size: 4rem;
-}
-
-.heading span {
-	color: var(--main-color);
-	text-transform: uppercase;
 }
 
 /** Search Bar */
@@ -114,6 +100,7 @@ header .search-bar-container label:hover {
 	height: 40px;
 }
 .header {
+	font-family: "Poppins", sans-serif;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -158,54 +145,139 @@ header .search-bar-container label:hover {
 	cursor: pointer;
 	display: none;
 }
+/* Home Section */
 
-/** Home Section With Sliding Photos */
-
+/* Order Confirmation Section */
+.home {
+	font-family: "Nunito", sans-serif;
+}
 .home .content {
-	display: flex;
-	align-items: flex-start;
-	padding-top: 10rem;
-	max-width: 70rem;
+	margin-bottom: 3rem;
+	padding-top: 90px;
 }
 
 .home .content h3 {
-	color: #3867d6;
+	font-family: "Nunito", sans-serif;
 	font-size: 4.5rem;
-	text-transform: uppercase;
-	line-height: 70px;
+	color: #fff;
+	text-align: center;
 }
 
+.home .sub-content h4 span {
+	color: #3867d6;
+	word-spacing: 0.4rem;
+}
 .home .sub-content h4 {
+	font-family: "Nunito", sans-serif;
+	font-size: 3rem;
 	color: #fff;
-	font-size: 2.5rem;
-	line-height: 40px;
+	text-align: left;
 }
 
-.home .content-2 {
+.home .sub-content-2 {
+	margin-top: 3rem;
+}
+
+.home .sub-content-2 .details {
+	margin-bottom: 3rem;
+}
+
+.home .sub-content-2 h2 {
+	color: #fff;
+	font-size: 2.5rem;
+	font-weight: 700;
+	line-height: 1.5;
+	margin-bottom: 1rem;
+}
+
+.home .sub-content-2 table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 1rem;
+}
+
+.home .sub-content-2 td {
+	padding: 1rem;
+	font-size: 2rem;
+	color: #fff;
+	border-bottom: 1px solid #fff;
+	text-transform: none;
+}
+
+.home .sub-content-2 td:first-child {
+	font-weight: bold;
+	color: #fff;
+	width: 30%;
+}
+
+.home .sub-content-2 td:last-child {
+	text-align: right;
+}
+
+/* Additional styling for "Selected Services" section */
+.home .sub-content-2 .details:nth-child(3) td:first-child {
+	width: auto;
+	text-align: left;
+}
+
+.home .sub-content-2 p {
+	color: #fff;
+	font-size: 2rem;
+	line-height: 1.5;
+	margin-bottom: 0.5rem;
+}
+
+.home .sub-content-2 p span {
+	color: #3867d6;
+	font-size: 2rem;
+	font-weight: 600;
+}
+
+/* Styling buttons */
+.btn-container {
 	display: flex;
-	align-items: flex-start;
-	padding-top: 5rem;
-	max-width: 70rem;
+	justify-content: center;
+	gap: 1rem;
+	margin-bottom: 3rem;
 }
 
-.home .content-2 h3 {
-	color: #3867d6;
-	font-size: 4.5rem;
-	text-transform: uppercase;
-	line-height: 70px;
-}
-
-.home .sub-content-2 h4 {
+.btn-1,
+.btn-2 {
+	font-family: "Poppins", sans-serif;
+	margin-top: 1rem;
+	display: inline-block;
+	padding: 0.8rem 3rem;
+	font-size: 1.7rem;
+	border-radius: 0.5rem;
+	background: #666;
 	color: #fff;
-	font-size: 2.5rem;
-	line-height: 40px;
-}
-.home .sub-content-2 h4 span {
-	color: #3867d6;
-	text-transform: uppercase;
+	cursor: pointer;
+	font-weight: 600;
 }
 
-.container {
+.btn-1:hover,
+.btn-2:hover {
+	background: inherit;
+}
+
+.btn-1 {
+	background: #666;
+}
+
+.btn-2 {
+	background: #666;
+	color: #fff;
+}
+
+.btn-1:hover {
+	background: red;
+}
+
+.btn-2:hover {
+	background: var(--main-color);
+}
+
+/* .container {
 	padding-top: 20px;
 }
 
@@ -228,7 +300,7 @@ header .search-bar-container label:hover {
 
 .container form .submit-btn:hover {
 	background: #303030;
-}
+} */
 
 /** booking confirmed section styling */
 

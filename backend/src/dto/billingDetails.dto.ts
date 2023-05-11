@@ -1,4 +1,13 @@
-import { IsString, IsNotEmpty, IsEmail } from "class-validator";
+import { Transform } from "class-transformer";
+import { format } from "date-fns";
+import {
+	IsString,
+	IsNotEmpty,
+	IsEmail,
+	IsDate,
+	isDateString,
+	IsDateString,
+} from "class-validator";
 
 export class BillingDetailsDto {
 	@IsString()
@@ -31,4 +40,9 @@ export class BillingDetailsDto {
 
 	@IsNotEmpty()
 	billingTypeId: string;
+
+	@IsNotEmpty()
+	@IsDateString()
+	@Transform(({ value }) => new Date(value).toISOString())
+	bookingDate: Date;
 }
