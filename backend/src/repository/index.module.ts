@@ -28,6 +28,9 @@ import { BillingController } from "src/controller/billing.controller";
 import { BillingService } from "src/service/billing.service";
 import { ReceiptController } from "src/controller/receipt.controller";
 import { ReceiptService } from "src/service/receipt.service";
+import { OTP } from "src/entities/otp.entity";
+import { OTPService } from "src/service/otp.service";
+import { OTPController } from "src/controller/otp.controller";
 
 @Module({
 	imports: [
@@ -45,6 +48,7 @@ import { ReceiptService } from "src/service/receipt.service";
 			Receipt,
 			BillingType,
 			CreditCard,
+			OTP,
 		]),
 		JwtModule.register({
 			secret: process.env.JWT_SECRET,
@@ -58,6 +62,7 @@ import { ReceiptService } from "src/service/receipt.service";
 		BillingController,
 		CardPaymentController,
 		ReceiptController,
+		OTPController,
 	],
 	providers: [
 		UserService,
@@ -67,6 +72,7 @@ import { ReceiptService } from "src/service/receipt.service";
 		PaymentService,
 		ReceiptService,
 		JwtStrategy,
+		OTPService,
 	],
 })
 export class IndexModule {}

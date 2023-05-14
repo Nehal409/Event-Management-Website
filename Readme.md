@@ -48,3 +48,8 @@ Make sure to have the following installed in your system before running the appl
 5. Copy the seeds file into the migration folder and run 'npm run migration:run' again.
 
 Note that you should have a database created on your localhost server before running the migrations.
+
+Remaining Work:
+1- create a popup modal that will hit on every webpage when the user is not logged in or token is expired that popup model will route user to login screen.
+2- frontend form validation.
+3- twilio message api when the otp is successful.

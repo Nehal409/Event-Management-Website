@@ -124,4 +124,24 @@ export class ReceiptService {
 
 		return receiptDetails;
 	}
+
+	/** Get Email of the user who is booking the event  */
+	async getUserEmail(id: string) {
+		const userEmail = await this.receiptRepo.find({
+			select: {
+				id: true,
+				billingDetails: {
+					email: true,
+				},
+			},
+			relations: {
+				billingDetails: true,
+			},
+			where: {
+				id: id,
+			},
+		});
+
+		return userEmail;
+	}
 }

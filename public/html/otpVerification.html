@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>OTP Verification Form</title>
+		<link rel="stylesheet" href="../css/otp.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+		/>
+		<link rel="stylesheet" href="../css//successToast.css" />
+		<link rel="stylesheet" href="../css//failureToast.css" />
+
+		<!-- Boxicons CSS -->
+		<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+
+		<link
+			href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<i class="bx bxs-check-shield"></i>
+			</header>
+			<h4>Enter OTP Code</h4>
+			<p id="getEmail"></p>
+
+			<form id="otpForm" action="#">
+				<div class="input-field">
+					<input type="number" id="otp1" />
+					<input type="number" id="otp2" disabled />
+					<input type="number" id="otp3" disabled />
+					<input type="number" id="otp4" disabled />
+				</div>
+				<button id="verifyButton">Verify OTP</button>
+			</form>
+		</div>
+
+		<!-- Success OTP -->
+		<div class="toast">
+			<div class="toast-content">
+				<i class="fas fa-solid fa-check check"></i>
+
+				<div class="message">
+					<span class="text text-1">Success</span>
+					<span class="text text-2" id="text"></span>
+				</div>
+			</div>
+			<i class="fa-solid fa-xmark close"></i>
+			<div class="progress"></div>
+		</div>
+
+		<!-- Failure OTP -->
+		<div class="toastFailure">
+			<div class="toast-content">
+				<i class="fas fa-solid fa-times times"></i>
+				<div class="message">
+					<span class="text text-1">Failure</span>
+					<span class="text text-2" id="texts"></span>
+				</div>
+			</div>
+			<i class="fa-solid fa-xmark closes"></i>
+			<div class="progresss"></div>
+		</div>
+
+		<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+		<!-- custom js file link  -->
+		<script src="../js/otp/toastAlert.js"></script>
+		<script src="../js/otp/toastAlertFailure.js"></script>
+		<script src="../js/otp/index.js"></script>
+	</body>
+</html>

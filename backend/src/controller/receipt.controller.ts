@@ -33,4 +33,11 @@ export class ReceiptController {
 	getReceiptDetails(@Param("id") id: string) {
 		return this.receiptService.getBookingDetails(id);
 	}
+
+	@UseGuards(JwtAuthGuard)
+	@Get("/email/:id")
+	@UseFilters(HttpExceptionFilter)
+	getEmail(@Param("id") id: string) {
+		return this.receiptService.getUserEmail(id);
+	}
 }

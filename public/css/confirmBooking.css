@@ -204,6 +204,14 @@ header .search-bar-container label:hover {
 	text-transform: none;
 }
 
+.home .sub-content-2 tbody td {
+	padding: 1rem;
+	font-size: 2rem;
+	color: #fff;
+	border-bottom: 1px solid #fff;
+	text-transform: none;
+}
+
 .home .sub-content-2 td:first-child {
 	font-weight: bold;
 	color: #fff;
