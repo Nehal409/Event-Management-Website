@@ -1,3 +1,4 @@
+require("dotenv").config();
 import {
 	HttpException,
 	HttpStatus,
@@ -26,15 +27,15 @@ export class OTPService {
 			// // Send OTP to the user's email
 			const transporter = nodemailer.createTransport({
 				// Configure your email provider details here
-				service: "gmail",
+				service: process.env.SERVICE,
 				auth: {
-					user: "sm.eventscompany@gmail.com",
-					pass: "trajybocseqtpeke",
+					user: process.env.EMAIL_SENDER,
+					pass: process.env.EMAIL_PASSWORD,
 				},
 			});
 
 			const mailOptions = {
-				from: "sm.eventscompany@gmail.com",
+				from: process.env.EMAIL_SENDER,
 				to: email,
 				subject: "OTP Verification",
 				text: `Your OTP code is: ${otp.code}`,

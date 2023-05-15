@@ -1,0 +1,80 @@
+.popupsection {
+	display: none; /* Initially hide the popup */
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	z-index: 9999;
+}
+.popupsection a {
+	font-size: 18px;
+	font-weight: 400;
+	color: #fff;
+	padding: 14px 22px;
+	border: none;
+	background: #4070f4;
+	border-radius: 6px;
+	cursor: pointer;
+}
+.popupsection a:hover {
+	background-color: #265df2;
+}
+
+.popupsection .modal-box {
+	position: fixed;
+	max-width: 380px;
+	width: 100%;
+	padding: 30px 20px;
+	border-radius: 24px;
+	background-color: #fff;
+	opacity: 0;
+	pointer-events: none;
+	transition: all 0.3s ease;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%) scale(1.2);
+	text-align: center; /* Center align the contents */
+}
+
+.popupsection.active {
+	display: flex; /* Show the popup when the active class is added */
+	background-color: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(5px); /* Add backdrop blur effect */
+}
+
+.popupsection.active .modal-box {
+	opacity: 1;
+	pointer-events: auto;
+	transform: translate(-50%, -50%) scale(1);
+}
+.popupsection .modal-box i {
+	font-size: 50px;
+	color: #4070f4;
+	margin-bottom: 20px;
+}
+.popupsection .modal-box h2 {
+	font-weight: bolder;
+	margin-bottom: 10px;
+	font-size: 25px;
+	font-weight: 500;
+	color: #333;
+	text-transform: none;
+}
+.popupsection .modal-box h3 {
+	font-size: 18px;
+	font-weight: 400;
+	color: #333;
+	text-transform: none;
+	margin-bottom: 20px;
+}
+.popupsection .modal-box .buttons {
+	margin-top: 15px;
+}
+.popupsection .modal-box a {
+	font-size: 18px;
+	padding: 6px 30px;
+	margin: 0 120px;
+}

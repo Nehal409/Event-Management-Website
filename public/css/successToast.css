@@ -47,9 +47,9 @@ body {
 	margin: 0 20px;
 }
 
-.message .text {
-	font-size: 20px;
-	font-weight: 400;
+.message #text {
+	font-size: 17px;
+	font-weight: 500;
 	color: #666666;
 }
 

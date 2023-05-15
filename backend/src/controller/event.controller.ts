@@ -24,6 +24,7 @@ import { JwtAuthGuard } from "src/utils/guards/jwt-guard.guard";
 export class EventController {
 	constructor(private readonly eventService: EventService) {}
 	/** homepage  */
+	@UseGuards(JwtAuthGuard)
 	@Get("/types")
 	getEventType() {
 		return this.eventService.getEventTypes();

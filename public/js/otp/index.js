@@ -123,7 +123,7 @@ form.addEventListener("click", async function (e) {
 			const verificationResponse = await axios
 				.post("http://localhost:3000/otp/verify", { email, code: otp })
 				.then(response => {
-					showSuccessToast("Booking confirmed! Confirmation message sent.");
+					showSuccessToast("Booking confirmed! Message sent.");
 				});
 		} catch (error) {
 			if (error.response.data.message === "Otp not found") {
