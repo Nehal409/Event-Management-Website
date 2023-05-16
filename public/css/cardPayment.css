@@ -195,14 +195,14 @@ header .search-bar-container label:hover {
 	text-transform: uppercase;
 }
 
-/** billing section styling */
+/** payment section styling */
 
 .container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	padding: 25px;
-	padding-bottom: 200px;
+	padding-bottom: 250px;
 	min-height: 100vh;
 }
 
@@ -210,7 +210,7 @@ header .search-bar-container label:hover {
 	padding: 20px;
 	padding-top: 10px;
 	width: 50%;
-	background: #ccc;
+	background: #ffffff;
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -239,7 +239,7 @@ header .search-bar-container label:hover {
 
 .container form .row .col .inputBox input {
 	width: 100%;
-	border: 1px solid #ccc;
+	border: 2px solid #ccc;
 	padding: 10px 15px;
 	font-size: 18px;
 	text-transform: none;
@@ -302,6 +302,7 @@ header .search-bar-container label:hover {
 	font-size: 1.5rem;
 	padding: 1rem 0;
 	color: #eee;
+	text-transform: none;
 }
 
 .footer .box-container .box a i {

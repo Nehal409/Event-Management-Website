@@ -373,6 +373,7 @@ header .search-bar-container label:hover {
 	font-size: 1.5rem;
 	padding: 1rem 0;
 	color: #eee;
+	text-transform: none;
 }
 
 .footer .box-container .box a i {

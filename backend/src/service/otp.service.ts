@@ -38,7 +38,7 @@ export class OTPService {
 				from: process.env.EMAIL_SENDER,
 				to: email,
 				subject: "OTP Verification",
-				text: `Your OTP code is: ${otp.code}`,
+				html: `<p style="font-size: 16px; color: #333;">Your OTP code is: <strong>${otp.code}</strong></p>`,
 			};
 
 			await transporter.sendMail(mailOptions);

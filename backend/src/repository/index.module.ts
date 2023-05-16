@@ -31,6 +31,7 @@ import { ReceiptService } from "src/service/receipt.service";
 import { OTP } from "src/entities/otp.entity";
 import { OTPService } from "src/service/otp.service";
 import { OTPController } from "src/controller/otp.controller";
+import { TwilioService } from "src/service/twilio.service";
 
 @Module({
 	imports: [
@@ -73,6 +74,7 @@ import { OTPController } from "src/controller/otp.controller";
 		ReceiptService,
 		JwtStrategy,
 		OTPService,
+		TwilioService,
 	],
 })
 export class IndexModule {}

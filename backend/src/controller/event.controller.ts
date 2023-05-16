@@ -15,7 +15,6 @@ import { EventBookingDto } from "src/dto/eventBooking.dto";
 import { EventBookingServiceDto } from "src/dto/eventBookingServices.dto";
 import { EventBooking } from "src/entities/eventBooking.entity";
 import { EventBookingServices } from "src/entities/eventBookingServices.entity";
-
 import { EventService } from "src/service/event.service";
 import { getCurrentUserById } from "src/utils/decorators/get-user-by-id-jwt.decorator";
 import { JwtAuthGuard } from "src/utils/guards/jwt-guard.guard";

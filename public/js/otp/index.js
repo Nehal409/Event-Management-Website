@@ -81,6 +81,15 @@ async function getBookingEmail() {
 		});
 }
 
+async function sendConfirmationMessageWithTwilio() {
+	// Make API call to get the user email
+	const receiptId = id;
+	const sendMessage = await axios.get(
+		`http://localhost:3000/otp/confirm-booking/message/${receiptId}`,
+	);
+	console.log(sendMessage);
+}
+
 async function generateOtp() {
 	// Generate OTP on page load
 	window.addEventListener("DOMContentLoaded", async () => {
@@ -122,8 +131,11 @@ form.addEventListener("click", async function (e) {
 		try {
 			const verificationResponse = await axios
 				.post("http://localhost:3000/otp/verify", { email, code: otp })
-				.then(response => {
-					showSuccessToast("Booking confirmed! Message sent.");
+				.then(async response => {
+					await showSuccessToast("Booking confirmed! Message sent.");
+					await sendConfirmationMessageWithTwilio();
+					/** Redirect user to index page */
+					window.location.href = "index.html";
 				});
 		} catch (error) {
 			if (error.response.data.message === "Otp not found") {

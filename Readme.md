@@ -10,7 +10,7 @@ Users can also select a slot for their event, such as morning, evening, or any o
 
 Once the user has selected their vendor, they will be required to fill in their billing details such as their name, CNIC number, phone number, and address. The user can choose from different payment options such as card, bank transfer, or any other preferred method.
 
-After completing the payment procedure, the user will receive an OTP number on their phone. They must confirm this OTP number to complete the order. After the user's order has been confirmed, they will receive a confirmation message on their mobile number. Additionally, the details of their order will be displayed on the webpage.
+After completing the payment procedure, the user will receive an OTP number via email. They must confirm this OTP number to complete the order. After the user's order has been confirmed, they will receive a confirmation message on their mobile number. Additionally, the details of their order will be displayed on the webpage.
 
 Overall, the event management website provides a user-friendly platform that enables users to book events and services with ease. The website's various features ensure that the user can easily select the vendor, services, and other details required for their event, making the event planning process more convenient and hassle-free.
 
@@ -34,10 +34,10 @@ Make sure to have the following installed in your system before running the appl
 
 #### backend
 
-1. Install the required packages by running npm install in the backend's root folder.
+1. Install the required packages by running "npm install" in the backend's root folder.
 2. Ensure that XAMPP server is running before starting the backend server.
 3. Import the "event-db.sql" file located in the project root folder to your localhost. First, create a database with the name "event-db" and then import the SQL file into that database.
-4. To start the server, run npm run start:dev in the backend's root folder (e.g. /workspace/Event-Management-Website/backend).
+4. To start the server, "run npm run start:dev" in the backend's root folder (e.g. /workspace/Event-Management-Website/backend).
 
 #### Create Migrations
 

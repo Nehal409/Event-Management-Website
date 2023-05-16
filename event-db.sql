@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 21, 2023 at 03:05 PM
+-- Generation Time: May 16, 2023 at 11:41 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -35,6 +35,7 @@ CREATE TABLE `billing_details` (
   `phone` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `cnic` varchar(255) NOT NULL,
+  `bookingDate` date NOT NULL,
   `billingTypeId` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -180,11 +181,25 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `timestamp`, `name`) VALUES
-(1, 1682081590945, 'initialMigration1682081590945'),
+(1, 1683913010228, 'initialMigration1683913010228'),
 (2, 1675766022400, 'channelSeeds1675766022400'),
 (3, 1676047048400, 'vendorSeeds1676047048400'),
 (4, 1676047059005, 'venueSeeds1676047059005'),
 (5, 1676196200857, 'serviceSeeds1676196200857');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `otp`
+--
+
+CREATE TABLE `otp` (
+  `id` int(11) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `createdDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `expireDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -523,6 +538,12 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `otp`
+--
+ALTER TABLE `otp`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `receipt`
 --
 ALTER TABLE `receipt`
@@ -593,6 +614,12 @@ ALTER TABLE `migrations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `otp`
+--
+ALTER TABLE `otp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
 -- AUTO_INCREMENT for table `service`
 --
 ALTER TABLE `service`
@@ -602,7 +629,7 @@ ALTER TABLE `service`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `vendor`

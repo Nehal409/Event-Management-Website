@@ -285,31 +285,6 @@ header .search-bar-container label:hover {
 	background: var(--main-color);
 }
 
-/* .container {
-	padding-top: 20px;
-}
-
-.container form .submit-btn {
-	font-size: 1.5rem;
-	border-radius: 0.5rem;
-	background: #3867d6;
-	color: #fff;
-	cursor: pointer;
-	font-weight: 600;
-	width: 230px;
-	height: auto;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-wrap: wrap;
-	padding: 15px 10px;
-	margin-top: 5px;
-}
-
-.container form .submit-btn:hover {
-	background: #303030;
-} */
-
 /** booking confirmed section styling */
 
 /* media queries  */
